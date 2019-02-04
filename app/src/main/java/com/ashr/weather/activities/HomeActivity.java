@@ -13,6 +13,7 @@ import static com.ashr.weather.utilities.FragmentHelper.pushToFragmentManager;
  *  This is the main activity that is called by default by our app. It's only function is to act as a content frame for our fragment manager.
  */
 public class HomeActivity extends AppCompatActivity {
+    String check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
