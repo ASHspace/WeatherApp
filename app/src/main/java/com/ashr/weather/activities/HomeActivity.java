@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ashr.weather.fragments.ForecastMasterFragment;
-import com.toddashmore.weather.R;
+
 
 import static com.ashr.weather.utilities.FragmentHelper.pushToFragmentManager;
 

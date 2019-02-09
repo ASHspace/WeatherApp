@@ -4,8 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ashr.weather.activities.R;
 import com.github.pwittchen.weathericonview.WeatherIconView;
-import com.toddashmore.weather.R;
+
 
 public class ForecastMasterViewHolder extends RecyclerView.ViewHolder {
     TextView day;

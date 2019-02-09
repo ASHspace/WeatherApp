@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ashr.weather.activities.R;
 import com.ashr.weather.models.Datum;
-import com.toddashmore.weather.R;
 
 import java.util.List;
 import java.util.Locale;

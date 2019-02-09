@@ -10,13 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ashr.weather.activities.R;
 import com.ashr.weather.adapters.ForecastMasterAdapter;
 import com.ashr.weather.models.Forecast;
 import com.ashr.weather.models.WeatherLocation;
 import com.ashr.weather.services.WeatherApiUtils;
 import com.ashr.weather.utilities.FragmentHelper;
 import com.ashr.weather.utilities.ItemClickSupport;
-import com.toddashmore.weather.R;
+
 
 /**
  * This fragment shows the user the current conditions of their entered location.
