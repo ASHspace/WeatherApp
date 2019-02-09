@@ -31,7 +31,7 @@ public class ForecastMasterAdapter extends RecyclerView.Adapter<ForecastMasterVi
 
     @Override
     public ForecastMasterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_week_forecast, parent, false);
+        View view = inflater.inflate(R.layout.week_view, parent, false);
         return new ForecastMasterViewHolder(view);
     }
 

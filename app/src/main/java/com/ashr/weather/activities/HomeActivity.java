@@ -20,7 +20,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // This app doesn't use the action bar, so it is being hidden.
-        getSupportActionBar().hide();
+       // getSupportActionBar().hide();
 
         // Setup the content view.
         setContentView(R.layout.activity_home);

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tv_weekly_forecast_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="center_vertical"
+        android:text="day"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.github.pwittchen.weathericonview.WeatherIconView
+        android:id="@+id/weather_icon_item"
+        custom:weatherIconColor="@android:color/darker_gray"
+        custom:weatherIconResource="@string/wi_day_sunny_overcast"
+        custom:weatherIconSize="26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp" />
+
+
+
+
+    <TextView
+        android:id="@+id/tv_weekly_forecast_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:text="high"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_weekly_forecast_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="low"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="15sp" />
+
+</LinearLayout>

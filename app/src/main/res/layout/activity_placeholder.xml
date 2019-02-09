@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_week_forecast"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text=" Place Holder" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -118,7 +118,7 @@ public class ForecastMasterFragment extends Fragment implements View.OnClickList
         );
 
         // Setup the layout as Linear.
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
     }
 
