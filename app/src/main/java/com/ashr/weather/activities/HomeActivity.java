@@ -3,10 +3,12 @@ package com.ashr.weather.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.ashr.weather.fragments.ForecastDailyFragment;
 import com.ashr.weather.fragments.ForecastMasterFragment;
 
 
 import static com.ashr.weather.utilities.FragmentHelper.pushToFragmentManager;
+import static com.ashr.weather.utilities.FragmentSupportHelper.pushToSupportFragmentManager;
 
 
 /**
@@ -26,6 +28,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         // Since this is just a blank activity, we must push ForecastMasterFragment onto the content_frame.
-        pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
+        //pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
+
+        pushToSupportFragmentManager(getSupportFragmentManager(), R.id.content_frame, new ForecastDailyFragment(), false);
     }
 }

@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 
 import com.ashr.weather.adapters.ViewPagerAdapter;
 import com.ashr.weather.fragments.ForecastMasterFragment;
-import com.ashr.weather.fragments.WeeklyWeather;
 
 
 import java.util.ArrayList;
@@ -35,25 +34,10 @@ public class MainActivity extends AppCompatActivity {
         mMyViewPager = findViewById(R.id.viewpager);
 
 
-        initSetup();
 
         //addToFragmentManager(getSupportFragmentManager(), R.id.content_frame, new TodayWeather(), false);
 
         pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
     }
 
-    private void initSetup() {
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new WeeklyWeather());
-        fragments.add(new WeeklyWeather());
-
-        //pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
-        //pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
-
-        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
-        mMyViewPager.setAdapter(pagerAdapter);
-        mTabLayout.setupWithViewPager(mMyViewPager, true);
-        mTabLayout.getTabAt(0).setText("Today");
-        mTabLayout.getTabAt(1).setText("7 Days");
-    }
 }

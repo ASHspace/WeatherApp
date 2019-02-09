@@ -8,7 +8,9 @@ import com.ashr.weather.fragments.ForecastMasterFragment;
 import com.ashr.weather.models.Datum;
 import com.ashr.weather.models.Forecast;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,6 +18,7 @@ import retrofit2.Response;
 
 public class WeatherApiUtils {
     private static final String BASE_URL = "https://api.darksky.net/forecast/";
+
 
     /**
      * Uses retrofit to call the Darksky api using the provided api key.
@@ -36,9 +39,13 @@ public class WeatherApiUtils {
     public static void getWeatherData(Location location, final ForecastMasterAdapter adapter, String apiKey, final ForecastMasterFragment forecastMasterFragment) {
         WeatherService api = WeatherApiUtils.getWeatherService(apiKey);
 
-        Log.i("API", api.getWeather(location.getLatitude(), location.getLongitude()).request().url().toString());
 
-        api.getWeather(location.getLatitude(), location.getLongitude()).enqueue(new Callback<Forecast>() {
+        Map<String, String> data = new HashMap<>();
+        data.put("units", "si");
+
+        Log.i("API", api.getWeather(location.getLatitude(), location.getLongitude(), data).request().url().toString());
+
+        api.getWeather(location.getLatitude(), location.getLongitude(),data).enqueue(new Callback<Forecast>() {
             @Override
             public void onResponse(Call<Forecast> call, Response<Forecast> response) {
                 if (response.isSuccessful()) {

@@ -17,13 +17,13 @@ import static com.ashr.weather.utilities.AndroidHelper.getStringIdentifier;
 import static com.ashr.weather.utilities.DateTimeHelper.convertEpochToString;
 
 
-public class ForecastMasterAdapter extends RecyclerView.Adapter<ForecastMasterViewHolder> {
+public class DailyDataAdapter extends RecyclerView.Adapter<ForecastMasterViewHolder> {
     @Nullable
     public static List<Datum> weeklyForecast;
     private LayoutInflater inflater;
     private Context context;
 
-    public ForecastMasterAdapter(@Nullable List<Datum> weeklyForecast, Context context) {
+    public DailyDataAdapter(@Nullable List<Datum> weeklyForecast, Context context) {
         this.weeklyForecast = weeklyForecast;
         this.inflater = LayoutInflater.from(context);
         this.context = context;

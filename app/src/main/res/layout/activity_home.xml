@@ -4,10 +4,41 @@
     android:id="@+id/activity_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
     tools:context="com.ashr.weather.activities.HomeActivity">
 
-    <android.support.v7.widget.ContentFrameLayout
-        android:id="@+id/content_frame"
+    <include
+        android:id="@+id/action_bar"
+        layout="@layout/custom_actionbar"></include>
+
+    <RelativeLayout
+        android:id="@+id/today"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="60"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.ContentFrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="60"
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.ContentFrameLayout
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+
+
 </LinearLayout>
