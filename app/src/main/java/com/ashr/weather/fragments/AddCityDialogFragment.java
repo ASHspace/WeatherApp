@@ -9,9 +9,10 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
 
+import com.ashr.weather.activities.R;
 import com.ashr.weather.utilities.FragmentHelper;
 import com.ashr.weather.utilities.SharedPreferencesHelper;
-import com.toddashmore.weather.R;
+
 
 /**
  * This DialogFragment is displayed when the user has not yet selected a location for weather data to be displayed.

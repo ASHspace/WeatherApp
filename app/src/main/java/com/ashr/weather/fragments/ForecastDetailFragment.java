@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ashr.weather.activities.R;
 import com.ashr.weather.models.Datum;
 import com.ashr.weather.utilities.AndroidHelper;
 import com.ashr.weather.utilities.DateTimeHelper;
 import com.github.pwittchen.weathericonview.WeatherIconView;
-import com.toddashmore.weather.R;
+
 
 import java.util.List;
 

@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
+import com.ashr.weather.activities.R;
 import com.ashr.weather.models.WeatherLocation;
-import com.toddashmore.weather.R;
+
 
 import static com.ashr.weather.utilities.SharedPreferencesHelper.CreateCityInSharedPrefs;
 

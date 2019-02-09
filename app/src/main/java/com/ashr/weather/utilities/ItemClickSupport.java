@@ -3,7 +3,8 @@ package com.ashr.weather.utilities;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.toddashmore.weather.R;
+import com.ashr.weather.activities.R;
+
 
 /*
   Source: http://www.littlerobots.nl/blog/Handle-Android-RecyclerView-Clicks/

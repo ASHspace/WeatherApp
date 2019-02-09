@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.ashr.weather.adapters.ViewPagerAdapter;
 import com.ashr.weather.fragments.ForecastMasterFragment;
-import com.toddashmore.weather.R;
+
 
 import java.util.ArrayList;
 
