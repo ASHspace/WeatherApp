@@ -3,8 +3,10 @@ package com.ashr.weather.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.ashr.weather.adapters.ForecastMasterAdapter;
 import com.ashr.weather.models.Forecast;
 import com.ashr.weather.models.WeatherLocation;
 import com.ashr.weather.services.WeatherApiUtils;
+import com.ashr.weather.services.WeatherApiUtils2;
 import com.ashr.weather.utilities.FragmentHelper;
 import com.ashr.weather.utilities.FragmentSupportHelper;
 import com.ashr.weather.utilities.ItemClickSupport;
@@ -45,10 +48,11 @@ public class ForecastDailyFragment extends Fragment implements View.OnClickListe
             // Set up the recyclerview.
             setupRecyclerView();
 
+
             // Make the settings button clickable.
            // setupSettingsButton();
         }
-
+        Log.d("test", "onCreateView: ");
         return view;
     }
 
@@ -80,7 +84,7 @@ public class ForecastDailyFragment extends Fragment implements View.OnClickListe
         // Make sure the user has put in a location.
         if (location.getName() != null) {
             // Fetch the current forecast, which updates current conditions and weekly forecast.
-           // WeatherApiUtils.getWeatherData(location.getLatitudeLongitude(), adapter, getString(R.string.dark_sky_api), this);
+           WeatherApiUtils2.getWeatherData(location.getLatitudeLongitude(), adapter, getString(R.string.dark_sky_api), this);
 
             // Set the text on the location label.
             //TextView locationLabel = (TextView) view.findViewById(R.id.text_location_name);
@@ -156,12 +160,7 @@ public class ForecastDailyFragment extends Fragment implements View.OnClickListe
         /**
          *  Populate all the text views.
          */
-        currentConditionLabel.setText(summary);
-        currentPrecipitationLabel.setText(getString(R.string.weather_percent, precipitation));
-        currentTempLabel.setText(getString(R.string.weather_temperature, currentTemp));
-        todayHighTempLabel.setText(getString(R.string.weather_temperature, highTemp));
-        todayLowTempLabel.setText(getString(R.string.weather_temperature, lowTemp));
-        currentWindLabel.setText(getString(R.string.weather_wind, windSpeed));
+
 
     }
 }

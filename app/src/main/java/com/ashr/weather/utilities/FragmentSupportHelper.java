@@ -4,6 +4,7 @@ package com.ashr.weather.utilities;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 public class FragmentSupportHelper {
     /**
@@ -16,7 +17,6 @@ public class FragmentSupportHelper {
      */
     public static void pushToSupportFragmentManager(FragmentManager fragmentManager, int target, Fragment fragment, Boolean addToBackStack) {
         FragmentTransaction transaction = fragmentManager.beginTransaction().replace(target, fragment);
-
         if(addToBackStack) transaction.addToBackStack(null);
 
         transaction.commit();

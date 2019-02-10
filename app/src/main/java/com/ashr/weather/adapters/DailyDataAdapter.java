@@ -71,4 +71,6 @@ public class DailyDataAdapter extends RecyclerView.Adapter<ForecastMasterViewHol
     public void updateView() {
         notifyDataSetChanged();
     }
+
+
 }

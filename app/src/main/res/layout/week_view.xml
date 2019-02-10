@@ -3,19 +3,19 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+    android:padding="12dp"
     android:orientation="vertical"
     android:gravity="center_vertical">
 
     <TextView
         android:id="@+id/tv_weekly_forecast_day"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="sans-serif-light"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center"
         android:text="day"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold" />
 
     <com.github.pwittchen.weathericonview.WeatherIconView
@@ -23,9 +23,9 @@
         custom:weatherIconColor="@android:color/darker_gray"
         custom:weatherIconResource="@string/wi_day_sunny_overcast"
         custom:weatherIconSize="26"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp" />
+        android:layout_height="wrap_content" />
 
 
 
@@ -34,7 +34,7 @@
         android:id="@+id/tv_weekly_forecast_high"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
+        android:layout_gravity="center"
         android:text="high"
         android:textSize="15sp" />
 
@@ -42,6 +42,7 @@
         android:id="@+id/tv_weekly_forecast_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="low"
         android:textColor="@android:color/darker_gray"
         android:textSize="15sp" />

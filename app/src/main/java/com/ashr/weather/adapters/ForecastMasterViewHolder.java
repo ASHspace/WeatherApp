@@ -22,4 +22,5 @@ public class ForecastMasterViewHolder extends RecyclerView.ViewHolder {
         high = (TextView) itemView.findViewById(R.id.tv_weekly_forecast_high);
         icon = (WeatherIconView) itemView.findViewById(R.id.weather_icon_item);
     }
+
 }
