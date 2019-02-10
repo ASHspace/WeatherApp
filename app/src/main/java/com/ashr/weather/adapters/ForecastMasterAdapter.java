@@ -39,7 +39,7 @@ public class ForecastMasterAdapter extends RecyclerView.Adapter<ForecastMasterVi
     public void onBindViewHolder(ForecastMasterViewHolder holder, int position) {
         Datum day = weeklyForecast.get(position);
 
-        String dayName = convertEpochToString(day.getTime(), "EEE", "GMT-6:00").toUpperCase();
+        String dayName = convertEpochToString(day.getTime(), "EEE", "GMT-6:00");
         String dayNameFormatted = String.format(Locale.ENGLISH, "%s", dayName);
 
         // Setup high and low temps.
