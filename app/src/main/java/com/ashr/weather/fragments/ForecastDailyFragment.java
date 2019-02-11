@@ -16,6 +16,7 @@ import com.ashr.weather.activities.R;
 import com.ashr.weather.adapters.ForecastMasterAdapter;
 import com.ashr.weather.models.Forecast;
 import com.ashr.weather.models.WeatherLocation;
+import com.ashr.weather.services.RandomKey;
 import com.ashr.weather.services.WeatherApiUtils;
 import com.ashr.weather.services.WeatherApiUtils2;
 import com.ashr.weather.utilities.FragmentHelper;
@@ -81,10 +82,13 @@ public class ForecastDailyFragment extends Fragment implements View.OnClickListe
     private void initializeWeatherData() {
         WeatherLocation location = new WeatherLocation(getActivity());
 
+        RandomKey randomKey = new RandomKey();
+        String api_key = randomKey.myrandomKey();
+
         // Make sure the user has put in a location.
         if (location.getName() != null) {
             // Fetch the current forecast, which updates current conditions and weekly forecast.
-           WeatherApiUtils2.getWeatherData(location.getLatitudeLongitude(), adapter, getString(R.string.dark_sky_api), this);
+           WeatherApiUtils2.getWeatherData(location.getLatitudeLongitude(), adapter, api_key, this);
 
             // Set the text on the location label.
             //TextView locationLabel = (TextView) view.findViewById(R.id.text_location_name);

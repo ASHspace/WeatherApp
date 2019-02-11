@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager, true);
         tabLayout.getTabAt(0).setText("Today");
-        tabLayout.getTabAt(1).setText("7 Days");
+        tabLayout.getTabAt(1).setText("Weekly");
 
 
         // Since this is just a blank activity, we must push ForecastMasterFragment onto the content_frame.
