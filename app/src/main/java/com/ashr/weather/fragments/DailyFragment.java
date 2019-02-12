@@ -13,14 +13,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ashr.weather.activities.R;
+import com.ashr.weather.adapters.CustomLinearLayoutManager;
+import com.ashr.weather.adapters.DailyFragmentAdapter;
 import com.ashr.weather.adapters.ForecastMasterAdapter;
 import com.ashr.weather.models.Forecast;
 import com.ashr.weather.models.WeatherLocation;
 import com.ashr.weather.services.RandomKey;
-import com.ashr.weather.services.WeatherApiUtils;
 import com.ashr.weather.services.WeatherApiUtils2;
-import com.ashr.weather.utilities.FragmentHelper;
-import com.ashr.weather.utilities.FragmentSupportHelper;
+import com.ashr.weather.services.WeatherApiUtilsDaily;
 import com.ashr.weather.utilities.ItemClickSupport;
 
 
@@ -28,8 +28,8 @@ import com.ashr.weather.utilities.ItemClickSupport;
  * This fragment shows the user the current conditions of their entered location.
  * It also provides a RecyclerView that shows the following weeks weather forecast.
  */
-public class ForecastDailyFragment extends Fragment implements View.OnClickListener {
-    public ForecastMasterAdapter adapter;
+public class DailyFragment extends Fragment implements View.OnClickListener {
+    public DailyFragmentAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
 
@@ -41,10 +41,12 @@ public class ForecastDailyFragment extends Fragment implements View.OnClickListe
             this.view = inflater.inflate(R.layout.activity_placeholder, container, false);
 
             // Setup the adapter so that it can be modified later asynchronously.
-            this.adapter = new ForecastMasterAdapter(null, view.getContext());
+            this.adapter = new DailyFragmentAdapter(null, view.getContext());
 
             // Fetch the location data and setup all weather data on this fragment.
-            initializeWeatherData();
+            //initializeWeatherData();
+
+
 
             // Set up the recyclerview.
             setupRecyclerView();
@@ -53,7 +55,6 @@ public class ForecastDailyFragment extends Fragment implements View.OnClickListe
             // Make the settings button clickable.
            // setupSettingsButton();
         }
-        Log.d("test", "onCreateView: ");
         return view;
     }
 
@@ -88,7 +89,7 @@ public class ForecastDailyFragment extends Fragment implements View.OnClickListe
         // Make sure the user has put in a location.
         if (location.getName() != null) {
             // Fetch the current forecast, which updates current conditions and weekly forecast.
-           WeatherApiUtils2.getWeatherData(location.getLatitudeLongitude(), adapter, api_key, this);
+            WeatherApiUtilsDaily.getWeatherData(location.getLatitudeLongitude(), adapter, api_key, this);
 
             // Set the text on the location label.
             //TextView locationLabel = (TextView) view.findViewById(R.id.text_location_name);
@@ -127,6 +128,7 @@ public class ForecastDailyFragment extends Fragment implements View.OnClickListe
         );
 
         // Setup the layout as Linear.
+       // CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
     }

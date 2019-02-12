@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import com.ashr.weather.models.Forecast;
 import com.ashr.weather.models.WeatherLocation;
 import com.ashr.weather.services.RandomKey;
 import com.ashr.weather.services.WeatherApiUtils;
+import com.ashr.weather.services.WeatherApiUtils2;
 import com.ashr.weather.utilities.FragmentHelper;
 import com.ashr.weather.utilities.ItemClickSupport;
 
@@ -25,7 +25,7 @@ import com.ashr.weather.utilities.ItemClickSupport;
  * This fragment shows the user the current conditions of their entered location.
  * It also provides a RecyclerView that shows the following weeks weather forecast.
  */
-public class ForecastMasterFragment extends Fragment implements View.OnClickListener {
+public class MainFragment extends Fragment implements View.OnClickListener {
     public ForecastMasterAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
@@ -35,7 +35,7 @@ public class ForecastMasterFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Only inflate our view and do the setup functions if the view is null. This prevents pop in of data and unnecessary API calls.
         if(view == null) {
-            this.view = inflater.inflate(R.layout.fragment_forecast_master, container, false);
+            this.view = inflater.inflate(R.layout.fragment_main, container, false);
 
             // Setup the adapter so that it can be modified later asynchronously.
             this.adapter = new ForecastMasterAdapter(null, view.getContext());
@@ -44,10 +44,10 @@ public class ForecastMasterFragment extends Fragment implements View.OnClickList
             initializeWeatherData();
 
             // Set up the recyclerview.
-            setupRecyclerView();
+           // setupRecyclerView();
 
             // Make the settings button clickable.
-            setupSettingsButton();
+            //setupSettingsButton();
         }
 
         return view;
@@ -58,7 +58,7 @@ public class ForecastMasterFragment extends Fragment implements View.OnClickList
     public void onClick(View v) {
         // If the user taps the settings button. Send them to that fragment.
         if(v.getId() == R.id.button_settings) {
-            FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new SettingsFragment(), true);
+            //FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new SettingsFragment(), true);
         }
     }
 
@@ -84,7 +84,7 @@ public class ForecastMasterFragment extends Fragment implements View.OnClickList
         // Make sure the user has put in a location.
         if (location.getName() != null) {
             // Fetch the current forecast, which updates current conditions and weekly forecast.
-           // WeatherApiUtils.getWeatherData(location.getLatitudeLongitude(), adapter, api_key, this);
+            WeatherApiUtils2.getWeatherData(location.getLatitudeLongitude(), api_key);
 
             // Set the text on the location label.
             TextView locationLabel = (TextView) view.findViewById(R.id.text_location_name);

@@ -1,18 +1,10 @@
 package com.ashr.weather.services;
 
-import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
-import com.ashr.weather.activities.HomeActivity;
-import com.ashr.weather.activities.MainActivity;
 import com.ashr.weather.adapters.DailyFragmentAdapter;
-import com.ashr.weather.adapters.ForecastMasterAdapter;
-import com.ashr.weather.adapters.WeeklyFragmentAdapter;
 import com.ashr.weather.fragments.DailyFragment;
-import com.ashr.weather.fragments.ForecastMasterFragment;
-import com.ashr.weather.fragments.WeeklyFragment;
-import com.ashr.weather.models.Datum;
 import com.ashr.weather.models.Datum_;
 import com.ashr.weather.models.Forecast;
 
@@ -24,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WeatherApiUtils {
+public class WeatherApiUtilsDaily {
     private static final String BASE_URL = "https://api.darksky.net/forecast/";
 
 
@@ -37,11 +29,15 @@ public class WeatherApiUtils {
         return RetrofitClient.getClient(BASE_URL+apiKey+"/").create(WeatherService.class);
     }
 
-
-    public static void getWeatherData(Location location,
-                                      String apiKey) {
-
-        WeatherService api = WeatherApiUtils.getWeatherService(apiKey);
+    /**
+     * Pulls weather data from the Darksky API using the provided location. On success it updates the adapter and forecastMasterFragment.
+     * @param location Used to pull the weather data for this particular location.
+     * @param adapter Used to update the adapter of the RecyclerView for forecastMasterFragment.
+     * @param apiKey Needed to access the Darksky api.
+     * @param forecastMasterFragment Used to update the current conditions on this fragment.
+     */
+    public static void getWeatherData(Location location, final DailyFragmentAdapter adapter, String apiKey, final DailyFragment forecastMasterFragment) {
+        WeatherService api = WeatherApiUtilsDaily.getWeatherService(apiKey);
 
 
         Map<String, String> data = new HashMap<>();
@@ -54,21 +50,12 @@ public class WeatherApiUtils {
             public void onResponse(Call<Forecast> call, Response<Forecast> response) {
                 if (response.isSuccessful()) {
                     List<Datum_> dailyData = response.body().getHourly().getData();
-                    List<Datum> weeklyData = response.body().getDaily().getData();
-
 
                     // Update the forecast data, but return a new list that does not have today in it.
-                   /* dailyFragmentAdapter.updateForecastData(dailyData.subList(1, 7));
+                    adapter.updateForecastData(dailyData.subList(1, 24));
 
                     // Update the current conditions views.
-                    dailyFragment.updateCurrentConditions(response.body());
-
-
-                    weeklyFragmentAdapter.updateForecastData(weeklyData);
-
-                    // Update the current conditions views.
-                    weeklyFragment.updateCurrentConditions(response.body());*/
-
+                    forecastMasterFragment.updateCurrentConditions(response.body());
                 } else {
                     Log.e("rest error", String.valueOf(response.code()));
                 }
@@ -80,9 +67,5 @@ public class WeatherApiUtils {
                 Log.d("Weather API", t.getMessage());
             }
         });
-    }
-
-    public interface MyCustomInterface{
-        public void sendData(Response<Forecast> res2);
     }
 }

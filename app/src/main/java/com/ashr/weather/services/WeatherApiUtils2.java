@@ -1,16 +1,12 @@
 package com.ashr.weather.services;
 
 import android.location.Location;
+import android.os.Bundle;
 import android.util.Log;
 
-import com.ashr.weather.adapters.ForecastMasterAdapter;
-import com.ashr.weather.fragments.ForecastDailyFragment;
-import com.ashr.weather.fragments.ForecastMasterFragment;
-import com.ashr.weather.models.Datum;
 import com.ashr.weather.models.Forecast;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -30,33 +26,27 @@ public class WeatherApiUtils2 {
         return RetrofitClient.getClient(BASE_URL+apiKey+"/").create(WeatherService.class);
     }
 
-    /**
-     * Pulls weather data from the Darksky API using the provided location. On success it updates the adapter and forecastMasterFragment.
-     * @param location Used to pull the weather data for this particular location.
-     * @param adapter Used to update the adapter of the RecyclerView for forecastMasterFragment.
-     * @param apiKey Needed to access the Darksky api.
-     * @param forecastMasterFragment Used to update the current conditions on this fragment.
-     */
-    public static void getWeatherData(Location location, final ForecastMasterAdapter adapter, String apiKey, final ForecastDailyFragment forecastMasterFragment) {
+
+    public static Bundle getWeatherData(Location location, String apiKey) {
+
         WeatherService api = WeatherApiUtils2.getWeatherService(apiKey);
 
+        Map<String, String> unitData = new HashMap<>();
+        unitData.put("units", "si");
 
-        Map<String, String> data = new HashMap<>();
-        data.put("units", "si");
-
-        Log.i("API", api.getWeather(location.getLatitude(), location.getLongitude(), data).request().url().toString());
-
-        api.getWeather(location.getLatitude(), location.getLongitude(),data).enqueue(new Callback<Forecast>() {
+        api.getWeather(location.getLatitude(), location.getLongitude(),unitData).enqueue(new Callback<Forecast>() {
             @Override
             public void onResponse(Call<Forecast> call, Response<Forecast> response) {
                 if (response.isSuccessful()) {
-                    List<Datum> dailyData = response.body().getDaily().getData();
+                    Log.d("Raw", "RetroFit2.0 :RetroGetLogin: " + response.body().toString());
+                    //List<Datum> dailyData = response.body().getDaily().getData();
 
                     // Update the forecast data, but return a new list that does not have today in it.
-                    adapter.updateForecastData(dailyData.subList(1, dailyData.size()));
+                    //adapter.updateForecastData(dailyData.subList(1, dailyData.size()));
 
                     // Update the current conditions views.
-                    forecastMasterFragment.updateCurrentConditions(response.body());
+                    //fragment.updateCurrentConditions(response.body());
+                    return;
                 } else {
                     Log.e("rest error", String.valueOf(response.code()));
                 }
@@ -68,5 +58,7 @@ public class WeatherApiUtils2 {
                 Log.d("Weather API", t.getMessage());
             }
         });
+
+        return null;
     }
 }
