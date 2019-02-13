@@ -3,6 +3,8 @@ package com.ashr.weather.activities;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -120,6 +122,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         WeeklyFragment weeklyFragment = new WeeklyFragment();
 
 
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         ArrayList<Fragment> fragments = new ArrayList<>();
@@ -141,17 +144,24 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         WeeklyFragmentAdapter weeklyFragmentAdapter = new WeeklyFragmentAdapter(weeklyData, this);
 
         // Update the forecast data, but return a new list that does not have today in it.
-                   dailyFragmentAdapter.updateForecastData(dailyData.subList(1, 7));
-                   weeklyFragmentAdapter.updateForecastData(weeklyData.subList(1, weeklyData.size()));
+        dailyFragmentAdapter.updateForecastData(dailyData.subList(1, 7));
+        weeklyFragmentAdapter.updateForecastData(weeklyData.subList(1, weeklyData.size()));
 
-                    // Update the current conditions views.
-                    dailyFragment.updateCurrentConditions(res2.body());
+        // Update the current conditions views.
+        dailyFragment.updateCurrentConditions(res2.body());
 
-                    weeklyFragment.updateCurrentConditions(res2.body());
+        weeklyFragment.updateCurrentConditions(res2.body());
+
+        MainFragment mainFragment = new MainFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.content_frame, mainFragment);
+
+        transaction.commit();
 
 
 
-       pushToFragmentManager(getFragmentManager(), R.id.content_frame, new MainFragment(), false);
+       //pushToFragmentManager(getFragmentManager(), R.id.content_frame, new MainFragment(), false);
 
 
 

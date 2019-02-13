@@ -1,8 +1,8 @@
 package com.ashr.weather.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,7 +41,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             this.adapter = new ForecastMasterAdapter(null, view.getContext());
 
             // Fetch the location data and setup all weather data on this fragment.
-            initializeWeatherData();
+            //initializeWeatherData();
 
             // Set up the recyclerview.
            // setupRecyclerView();
@@ -95,7 +95,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             AddCityDialogFragment addCityDialogFragment = new AddCityDialogFragment().newInstance();
 
             if (!addCityDialogFragment.isActive()) {
-                addCityDialogFragment.show(getFragmentManager(), "fragment_add_city");
+                //addCityDialogFragment.show(getFragmentManager(), "fragment_add_city");
             }
         }
     }
@@ -117,7 +117,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // When the user taps an item, a new instance of ForecastDetailFragment is provided and the position they selected is passed.
-                        FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastDetailFragment().newInstance(adapter.weeklyForecast, position), true);
+                        //FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastDetailFragment().newInstance(adapter.weeklyForecast, position), true);
                     }
                 }
         );
