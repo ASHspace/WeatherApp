@@ -44,7 +44,7 @@ public class AddCityDialogFragment extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 String location = input.getText().toString();
                 SharedPreferencesHelper.CreateCityInSharedPrefs(getActivity(), location);
-                FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
+               // FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
             }
         });
 

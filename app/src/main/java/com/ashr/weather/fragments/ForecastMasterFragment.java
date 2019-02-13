@@ -58,7 +58,7 @@ public class ForecastMasterFragment extends Fragment implements View.OnClickList
     public void onClick(View v) {
         // If the user taps the settings button. Send them to that fragment.
         if(v.getId() == R.id.button_settings) {
-            FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new SettingsFragment(), true);
+            //FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new SettingsFragment(), true);
         }
     }
 
@@ -117,7 +117,7 @@ public class ForecastMasterFragment extends Fragment implements View.OnClickList
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         // When the user taps an item, a new instance of ForecastDetailFragment is provided and the position they selected is passed.
-                        FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastDetailFragment().newInstance(adapter.weeklyForecast, position), true);
+                        //FragmentHelper.pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastDetailFragment().newInstance(adapter.weeklyForecast, position), true);
                     }
                 }
         );

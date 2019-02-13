@@ -44,7 +44,7 @@ public class DailyFragment extends Fragment implements View.OnClickListener {
             this.adapter = new DailyFragmentAdapter(null, view.getContext());
 
             // Fetch the location data and setup all weather data on this fragment.
-            initializeWeatherData();
+           // initializeWeatherData();
 
 
 
@@ -139,7 +139,7 @@ public class DailyFragment extends Fragment implements View.OnClickListener {
      * @param weatherData This is used to populate all of our labels.
      */
     public void updateCurrentConditions(Forecast weatherData) {
-        Log.d("TEST3", "onCreateView: " + view.toString());
+//        Log.d("TEST3", "onCreateView: " + view.toString());
         // If the view doesn't exist, an error will occur because we are calling it below. Return to prevent this.
         if (view == null || !isAdded()) {
             return;

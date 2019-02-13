@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         //addToFragmentManager(getSupportFragmentManager(), R.id.content_frame, new TodayWeather(), false);
 
-        pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
+       // pushToFragmentManager(getFragmentManager(), R.id.content_frame, new ForecastMasterFragment(), false);
     }
 
 }

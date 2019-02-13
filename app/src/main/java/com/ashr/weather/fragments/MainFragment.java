@@ -5,13 +5,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ashr.weather.activities.HomeActivity;
 import com.ashr.weather.activities.R;
 import com.ashr.weather.adapters.ForecastMasterAdapter;
+import com.ashr.weather.models.Datum;
 import com.ashr.weather.models.Forecast;
 import com.ashr.weather.models.WeatherLocation;
 import com.ashr.weather.services.RandomKey;
@@ -19,6 +22,8 @@ import com.ashr.weather.services.WeatherApiUtils;
 import com.ashr.weather.services.WeatherApiUtils2;
 import com.ashr.weather.utilities.FragmentHelper;
 import com.ashr.weather.utilities.ItemClickSupport;
+
+import java.util.List;
 
 
 /**
@@ -34,25 +39,28 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Only inflate our view and do the setup functions if the view is null. This prevents pop in of data and unnecessary API calls.
-        if(view == null) {
-            this.view = inflater.inflate(R.layout.fragment_main, container, false);
+        super.onCreateView(inflater, container, savedInstanceState);
 
-            // Setup the adapter so that it can be modified later asynchronously.
-            this.adapter = new ForecastMasterAdapter(null, view.getContext());
+        // Setup the view so that we can access it's components.
+        if(view == null) this.view = inflater.inflate(R.layout.fragment_main, container, false);
 
-            // Fetch the location data and setup all weather data on this fragment.
-            //initializeWeatherData();
-
-            // Set up the recyclerview.
-           // setupRecyclerView();
-
-            // Make the settings button clickable.
-            //setupSettingsButton();
-        }
+        // Populate all the text views on the fragment with the correct data.
+        populateWeatherData();
 
         return view;
     }
 
+
+    public static MainFragment newInstance(Forecast weatherData) {
+
+        // Create a bundle with all weather data so that we can access it when the view is being created below.
+        Bundle args = createBundle(weatherData);
+
+        // Create the new ForecastDetailFragment, set it's argument and then return it.
+        MainFragment fragment = new MainFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onClick(View v) {
@@ -137,6 +145,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             return;
         }
 
+        Log.d("TEST333", "updateCurrentConditions: ");
+
         /**
          * Fetch all the text views to populate them below.
          */
@@ -166,6 +176,46 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         todayHighTempLabel.setText(getString(R.string.weather_temperature, highTemp));
         todayLowTempLabel.setText(getString(R.string.weather_temperature, lowTemp));
         currentWindLabel.setText(getString(R.string.weather_wind, windSpeed));
+
+    }
+
+    private static Bundle createBundle(Forecast weatherData) {
+        // Create a bundle so that we can access it when the view is being created below.
+        Bundle bundle = new Bundle();
+
+
+        long currentTemp    = Math.round(weatherData.getCurrently().getTemperature());
+        String temp = String.valueOf(currentTemp);
+
+        bundle.putString("c_temp", temp);
+
+
+        return bundle;
+    }
+
+
+    private void populateWeatherData() {
+
+        // Get all of our arguments that were populated earlier.
+        Bundle args = getArguments();
+
+        /**
+         * Setup all of our text views.
+         */
+        TextView temp = (TextView) view.findViewById(R.id.c_temp);
+
+        /**
+         * Format all of our data correctly.
+         */
+
+        String temp_data = args.getString("c_temp");
+
+
+
+        /**
+         * Populate data from the bundle into the text views.
+         */
+        temp.setText(temp_data);
 
     }
 }

@@ -10,18 +10,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.ashr.weather.adapters.DailyFragmentAdapter;
+import com.ashr.weather.adapters.MainFragmentAdapter;
 import com.ashr.weather.adapters.ViewPagerAdapter;
 import com.ashr.weather.adapters.WeeklyFragmentAdapter;
 import com.ashr.weather.fragments.AddCityDialogFragment;
 import com.ashr.weather.fragments.DailyFragment;
+import com.ashr.weather.fragments.GenericView;
 import com.ashr.weather.fragments.MainFragment;
 import com.ashr.weather.fragments.WeeklyFragment;
 import com.ashr.weather.models.Datum;
 import com.ashr.weather.models.Datum_;
+import com.ashr.weather.models.Datum__;
 import com.ashr.weather.models.Forecast;
 import com.ashr.weather.models.WeatherLocation;
 import com.ashr.weather.services.RandomKey;
 import com.ashr.weather.services.WeatherApiUtils;
+import com.ashr.weather.utilities.FragmentHelper;
 
 
 import java.util.ArrayList;
@@ -116,10 +120,12 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
     @Override
     public void sendData(Response<Forecast> res2) {
         this.myStrings = res2;
+        //List<Datum__> currentData = res2.body().getMinutely().getData();
         List<Datum_> dailyData = res2.body().getHourly().getData();
         List<Datum> weeklyData = res2.body().getDaily().getData();
         DailyFragment dailyFragment = new DailyFragment();
         WeeklyFragment weeklyFragment = new WeeklyFragment();
+        GenericView genericView = new GenericView().newInstance(res2.body());
 
 
 
@@ -127,7 +133,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
 
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(dailyFragment);
-        fragments.add(weeklyFragment);
+        fragments.add(genericView);
 
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
         viewPager.setAdapter(pagerAdapter);
@@ -139,7 +145,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         tabLayout.getTabAt(1).setText("Weekly");
 
 
-
+       // MainFragmentAdapter mainFragmentAdapter = new MainFragmentAdapter(currentData, getApplicationContext());
         DailyFragmentAdapter dailyFragmentAdapter= new DailyFragmentAdapter(dailyData, getApplicationContext());
         WeeklyFragmentAdapter weeklyFragmentAdapter = new WeeklyFragmentAdapter(weeklyData, this);
 
@@ -152,12 +158,10 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
 
         weeklyFragment.updateCurrentConditions(res2.body());
 
-        MainFragment mainFragment = new MainFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        FragmentTransaction transaction = fragmentManager.beginTransaction().replace(R.id.content_frame, mainFragment);
+        FragmentHelper.pushToFragmentManager(getSupportFragmentManager(), R.id.content_frame, new MainFragment().newInstance(res2.body()), false);
 
-        transaction.commit();
+        //mainFragment.updateCurrentConditions(res2.body());
 
 
 
