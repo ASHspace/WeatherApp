@@ -4,22 +4,7 @@
         <shape android:shape="rectangle" >
 
             <corners
-                android:bottomLeftRadius="30dp"
-                android:bottomRightRadius="30dp"
-                android:radius="360dp"
-                android:topLeftRadius="30dp"
-                android:topRightRadius="30dp" />
-
-            <padding
-                android:bottom="10dp"
-                android:left="20dp"
-                android:right="20dp"
-                android:top="10dp" />
-
-
-            <size
-                android:height="0dp"
-                android:width="0dp" />
+                android:radius="360dp" />
 
         </shape>
     </item>

@@ -44,7 +44,7 @@ public class DailyFragment extends Fragment implements View.OnClickListener {
             this.adapter = new DailyFragmentAdapter(null, view.getContext());
 
             // Fetch the location data and setup all weather data on this fragment.
-            //initializeWeatherData();
+            initializeWeatherData();
 
 
 
@@ -55,6 +55,7 @@ public class DailyFragment extends Fragment implements View.OnClickListener {
             // Make the settings button clickable.
            // setupSettingsButton();
         }
+        Log.d("TEST3", "onCreateView: " + view.toString());
         return view;
     }
 
@@ -89,7 +90,7 @@ public class DailyFragment extends Fragment implements View.OnClickListener {
         // Make sure the user has put in a location.
         if (location.getName() != null) {
             // Fetch the current forecast, which updates current conditions and weekly forecast.
-            WeatherApiUtilsDaily.getWeatherData(location.getLatitudeLongitude(), adapter, api_key, this);
+            //WeatherApiUtilsDaily.getWeatherData(location.getLatitudeLongitude(), adapter, api_key, this);
 
             // Set the text on the location label.
             //TextView locationLabel = (TextView) view.findViewById(R.id.text_location_name);
@@ -138,6 +139,7 @@ public class DailyFragment extends Fragment implements View.OnClickListener {
      * @param weatherData This is used to populate all of our labels.
      */
     public void updateCurrentConditions(Forecast weatherData) {
+        Log.d("TEST3", "onCreateView: " + view.toString());
         // If the view doesn't exist, an error will occur because we are calling it below. Return to prevent this.
         if (view == null || !isAdded()) {
             return;
@@ -166,6 +168,8 @@ public class DailyFragment extends Fragment implements View.OnClickListener {
         /**
          *  Populate all the text views.
          */
+
+        Log.d("TEST3", "updateCurrentConditions: "+  weatherData.getCurrently().getTemperature());
 
 
     }

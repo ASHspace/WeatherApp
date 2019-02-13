@@ -25,8 +25,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class WeatherApiUtils {
-    private static final String BASE_URL = "https://api.darksky.net/forecast/";
-
+    private final static String BASE_URL = "https://api.darksky.net/forecast/";
+    MyCustomInterface myCustomInterface;
 
     /**
      * Uses retrofit to call the Darksky api using the provided api key.
@@ -37,8 +37,12 @@ public class WeatherApiUtils {
         return RetrofitClient.getClient(BASE_URL+apiKey+"/").create(WeatherService.class);
     }
 
+    public WeatherApiUtils(MyCustomInterface myCustomInterface) {
+        this.myCustomInterface = myCustomInterface;
+    }
 
-    public static void getWeatherData(Location location,
+
+    public void getWeatherData(Location location,
                                       String apiKey) {
 
         WeatherService api = WeatherApiUtils.getWeatherService(apiKey);
@@ -56,7 +60,7 @@ public class WeatherApiUtils {
                     List<Datum_> dailyData = response.body().getHourly().getData();
                     List<Datum> weeklyData = response.body().getDaily().getData();
 
-
+                    passData(response);
                     // Update the forecast data, but return a new list that does not have today in it.
                    /* dailyFragmentAdapter.updateForecastData(dailyData.subList(1, 7));
 
@@ -82,7 +86,10 @@ public class WeatherApiUtils {
         });
     }
 
+    public void passData(Response<Forecast> res){
+        myCustomInterface.sendData(res);
+    }
     public interface MyCustomInterface{
-        public void sendData(Response<Forecast> res2);
+        void sendData(Response<Forecast> res2);
     }
 }

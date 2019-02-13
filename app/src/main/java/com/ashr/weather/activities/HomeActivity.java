@@ -5,23 +5,25 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.ashr.weather.adapters.DailyFragmentAdapter;
 import com.ashr.weather.adapters.ViewPagerAdapter;
 import com.ashr.weather.adapters.WeeklyFragmentAdapter;
 import com.ashr.weather.fragments.AddCityDialogFragment;
 import com.ashr.weather.fragments.DailyFragment;
-import com.ashr.weather.fragments.ExampleFragment;
 import com.ashr.weather.fragments.MainFragment;
 import com.ashr.weather.fragments.WeeklyFragment;
+import com.ashr.weather.models.Datum;
+import com.ashr.weather.models.Datum_;
 import com.ashr.weather.models.Forecast;
 import com.ashr.weather.models.WeatherLocation;
 import com.ashr.weather.services.RandomKey;
 import com.ashr.weather.services.WeatherApiUtils;
-import com.ashr.weather.services.WeatherApiUtilsDaily;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Response;
 
@@ -34,8 +36,8 @@ import static com.ashr.weather.utilities.FragmentHelper.pushToFragmentManager;
 public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.MyCustomInterface {
     String check;
     Fragment mFragment;
-    public static Response<Forecast> myStrings;
-    DataLoadedListener mDataLoadedListener;
+    public Response<Forecast> myStrings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +50,11 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         setContentView(R.layout.activity_home);
 
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        //ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        mFragment = new ExampleFragment();
-        mDataLoadedListener = (DataLoadedListener) mFragment;
 
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(mFragment);
+        /*ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new DailyFragment());
         fragments.add(new WeeklyFragment());
 
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
@@ -67,11 +67,12 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         tabLayout.getTabAt(1).setText("Weekly");
 
         pushToFragmentManager(getFragmentManager(), R.id.content_frame, new MainFragment(), false);
-
+*/
         initializeWeatherData();
 
-        // notify attached fragment
-        mDataLoadedListener.onDataLoaded(myStrings);
+
+
+
 
 
         // Since this is just a blank activity, we must push ForecastMasterFragment onto the content_frame.
@@ -93,7 +94,8 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         // Make sure the user has put in a location.
         if (location.getName() != null) {
             // Fetch the current forecast, which updates current conditions and weekly forecast.
-            WeatherApiUtils.getWeatherData(location.getLatitudeLongitude(), api_key);
+            WeatherApiUtils weatherApiUtils = new WeatherApiUtils(this);
+            weatherApiUtils.getWeatherData(location.getLatitudeLongitude(), api_key);
 
             // Set the text on the location label.
             //TextView locationLabel = (TextView) view.findViewById(R.id.text_location_name);
@@ -109,8 +111,50 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         }
     }
 
-    public interface DataLoadedListener {
-        public void onDataLoaded(Response<Forecast> res);
+    @Override
+    public void sendData(Response<Forecast> res2) {
+        this.myStrings = res2;
+        List<Datum_> dailyData = res2.body().getHourly().getData();
+        List<Datum> weeklyData = res2.body().getDaily().getData();
+        DailyFragment dailyFragment = new DailyFragment();
+        WeeklyFragment weeklyFragment = new WeeklyFragment();
+
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(dailyFragment);
+        fragments.add(weeklyFragment);
+
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragments);
+        viewPager.setAdapter(pagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
+
+        tabLayout.setupWithViewPager(viewPager, true);
+        tabLayout.getTabAt(0).setText("Hourly");
+        tabLayout.getTabAt(1).setText("Weekly");
+
+
+
+        DailyFragmentAdapter dailyFragmentAdapter= new DailyFragmentAdapter(dailyData, getApplicationContext());
+        WeeklyFragmentAdapter weeklyFragmentAdapter = new WeeklyFragmentAdapter(weeklyData, this);
+
+        // Update the forecast data, but return a new list that does not have today in it.
+                   dailyFragmentAdapter.updateForecastData(dailyData.subList(1, 7));
+                   weeklyFragmentAdapter.updateForecastData(weeklyData.subList(1, weeklyData.size()));
+
+                    // Update the current conditions views.
+                    dailyFragment.updateCurrentConditions(res2.body());
+
+                    weeklyFragment.updateCurrentConditions(res2.body());
+
+
+
+       pushToFragmentManager(getFragmentManager(), R.id.content_frame, new MainFragment(), false);
+
+
+
     }
 
 

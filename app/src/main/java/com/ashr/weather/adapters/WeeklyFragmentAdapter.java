@@ -32,7 +32,7 @@ public class WeeklyFragmentAdapter extends RecyclerView.Adapter<WeeklyFragmentVi
 
     @Override
     public WeeklyFragmentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.daily_view, parent, false);
+        View view = inflater.inflate(R.layout.week_view, parent, false);
         return new WeeklyFragmentViewHolder(view);
     }
 
@@ -40,7 +40,7 @@ public class WeeklyFragmentAdapter extends RecyclerView.Adapter<WeeklyFragmentVi
     public void onBindViewHolder(WeeklyFragmentViewHolder holder, int position) {
         Datum day = weeklyWeatherData.get(position);
 
-        String dayName = convertEpochToString(day.getTime(), "h a", "GMT-6:00");
+        String dayName = convertEpochToString(day.getTime(), "EEE", "GMT-6:00");
         String dayNameFormatted = String.format(Locale.ENGLISH, "%s", dayName);
 
 

@@ -3,16 +3,21 @@ package com.ashr.weather.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ashr.weather.activities.R;
+import com.ashr.weather.adapters.DailyFragmentAdapter;
+import com.ashr.weather.adapters.WeeklyFragmentAdapter;
 import com.ashr.weather.models.Datum;
 import com.ashr.weather.models.Forecast;
 import com.ashr.weather.utilities.AndroidHelper;
 import com.ashr.weather.utilities.DateTimeHelper;
+import com.ashr.weather.utilities.ItemClickSupport;
 import com.github.pwittchen.weathericonview.WeatherIconView;
 
 import java.util.List;
@@ -21,37 +26,34 @@ import java.util.List;
  * When a user selects a day from the RecyclerView weekly forecast on the ForecastMasterFragment, this Fragment is displayed.
  * The index (int selectedDay) is passed into the newInstance and then used to populate all data.
  */
-public class WeeklyFragment extends Fragment {
-    View view;
+public class WeeklyFragment extends Fragment implements View.OnClickListener{
+    public WeeklyFragmentAdapter adapter;
+    private RecyclerView recyclerView;
+    private View view;
 
-    /**
-     * Creates a new instance of ForecastDetailFragment. This is primarily used so that we can pass the index (int selectedDay).
-     * @param forecast All forecast data. This is narrowed down by using selectedDay.
-     * @param selectedDay Used to show the day selected by the user.
-     * @return ForecastDetailFragment
-     */
-    public static WeeklyFragment newInstance(List<Datum> forecast, int selectedDay) {
-
-        // Create a bundle with all weather data so that we can access it when the view is being created below.
-        Bundle args = createBundle(forecast, selectedDay);
-
-        // Create the new ForecastDetailFragment, set it's argument and then return it.
-        WeeklyFragment fragment = new WeeklyFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+        // Only inflate our view and do the setup functions if the view is null. This prevents pop in of data and unnecessary API calls.
+        if(view == null) {
+            this.view = inflater.inflate(R.layout.activity_placeholder, container, false);
 
-        // Setup the view so that we can access it's components.
-        if(view == null) this.view = inflater.inflate(R.layout.fragment_forecast_detail, container, false);
+            // Setup the adapter so that it can be modified later asynchronously.
+            this.adapter = new WeeklyFragmentAdapter(null, view.getContext());
 
-        // Populate all the text views on the fragment with the correct data.
-        //populateWeatherData();
+            // Fetch the location data and setup all weather data on this fragment.
+            //initializeWeatherData();
 
+
+
+            // Set up the recyclerview.
+            setupRecyclerView();
+
+
+            // Make the settings button clickable.
+            // setupSettingsButton();
+        }
         return view;
     }
 
@@ -143,6 +145,40 @@ public class WeeklyFragment extends Fragment {
          *  Populate all the text views.
          */
 
+
+    }
+
+
+    private void setupRecyclerView() {
+        // Get the recyclerview so that we can set it up.
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_week_forecast);
+
+        // Set the adapter for the recyclerview. In this case, we are using null for our weather data because it will be fetched asynchronously later on.
+        recyclerView.setAdapter(adapter);
+
+        // Use this ItemClickSupport found at the following url to setup click support.
+        // https://gist.github.com/nesquena/231e356f372f214c4fe6
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(
+                new ItemClickSupport.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        // When the user taps an item, a new instance of ForecastDetailFragment is provided and the position they selected is passed.
+                        // FragmentSupportHelper.pushToSupportFragmentManager(getFragmentManager(), R.id.viewpager, new ForecastDetailFragment().newInstance(adapter.weeklyForecast, position), true);
+                    }
+                }
+        );
+
+        // Setup the layout as Linear.
+        // CustomLinearLayoutManager layoutManager = new CustomLinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+    }
+
+
+
+
+    @Override
+    public void onClick(View view) {
 
     }
 }
