@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ashr.weather.activities.R;
@@ -22,7 +20,7 @@ import java.util.Locale;
 import static com.ashr.weather.utilities.AndroidHelper.getStringIdentifier;
 import static com.ashr.weather.utilities.DateTimeHelper.convertEpochToString;
 
-public class GenericView extends Fragment {
+public class GenericViewDaily extends Fragment {
     private View view;
 
     @Nullable
@@ -30,35 +28,35 @@ public class GenericView extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        if(view == null) this.view = inflater.inflate(R.layout.generic_view, container, false);
+        if(view == null) this.view = inflater.inflate(R.layout.generic_view2, container, false);
 
         populateWeatherData();
 
         return view;
     }
 
-    public static GenericView newInstance(Forecast weatherData) {
+    public static GenericViewDaily newInstance(Forecast weatherData) {
         Bundle args = createBundle(weatherData);
-        GenericView fragment = new GenericView();
+        GenericViewDaily fragment = new GenericViewDaily();
         fragment.setArguments(args);
         return fragment;
     }
 
     private static Bundle createBundle(Forecast weatherData) {
         Bundle bundle = new Bundle();
-        List<Datum> dailyData = weatherData.getDaily().getData();
+        List<Datum_> dailyData = weatherData.getHourly().getData();
         dailyData = dailyData.subList(1, 8);
         int i=0;
 
 
-        for(Datum today: dailyData){
+        for(Datum_ today: dailyData){
             String dayName = convertEpochToString(today.getTime(), "E", "GMT-6:00");
             String dayNameFull = String.format(Locale.ENGLISH, "%s", dayName);
             String iconName = "wi_forecast_io_" + today.getIcon().replace("-", "_");
-            Long highTemp = Math.round(today.getTemperatureMax());
+            /*Long highTemp = Math.round(today.getTemperatureMax());
             String highTempFull = String.format(Locale.ENGLISH, "%s°", highTemp);
             Long lowTemp = Math.round(today.getTemperatureMin());
-            String lowTempFull = String.format(Locale.ENGLISH, "%s°", lowTemp);
+            String lowTempFull = String.format(Locale.ENGLISH, "%s°", lowTemp);*/
 
 
 
@@ -66,8 +64,8 @@ public class GenericView extends Fragment {
 
             bundle.putString("dayName" + i , dayNameFull);
             bundle.putString("iconName" + i , iconName);
-            bundle.putString("highTemp" + i , highTempFull);
-            bundle.putString("lowTemp" + i , lowTempFull);
+            //bundle.putString("highTemp" + i , highTempFull);
+            //bundle.putString("lowTemp" + i , lowTempFull);
 
             i++;
         }

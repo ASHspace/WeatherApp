@@ -18,8 +18,8 @@ public class WeeklyFragmentViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         day = (TextView) itemView.findViewById(R.id.w_day);
-        low = (TextView) itemView.findViewById(R.id.w_low);
-        high = (TextView) itemView.findViewById(R.id.w_high);
+       // low = (TextView) itemView.findViewById(R.id.w_low);
+        //high = (TextView) itemView.findViewById(R.id.w_high);
         icon = (WeatherIconView) itemView.findViewById(R.id.w_icon);
     }
 

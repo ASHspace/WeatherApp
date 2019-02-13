@@ -20,50 +20,50 @@
         android:columnCount="7">
 
     <include
-        android:id="@+id/week_1"
-        layout="@layout/week_view"
+        android:id="@+id/day_1"
+        layout="@layout/daily_view1"
         android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <include
-        android:id="@+id/week_2"
-        layout="@layout/week_view"
+        android:id="@+id/day_2"
+        layout="@layout/daily_view1"
         android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <include
-        android:id="@+id/week_3"
-        layout="@layout/week_view"
+        android:id="@+id/day_3"
+        layout="@layout/daily_view1"
         android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <include
-        android:id="@+id/week_4"
-        layout="@layout/week_view"
+        android:id="@+id/day_4"
+        layout="@layout/daily_view1"
         android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <include
-        android:id="@+id/week_5"
-        layout="@layout/week_view"
+        android:id="@+id/day_5"
+        layout="@layout/daily_view1"
         android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <include
-        android:id="@+id/week_6"
-        layout="@layout/week_view"
+        android:id="@+id/day_6"
+        layout="@layout/daily_view1"
         android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <include
-        android:id="@+id/week_7"
-        layout="@layout/week_view"
+        android:id="@+id/day_7"
+        layout="@layout/daily_view1"
         android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -70,8 +70,8 @@ public class WeeklyFragment extends Fragment implements View.OnClickListener{
          */
         TextView dayName         = (TextView) view.findViewById(R.id.w_day);
         WeatherIconView weatherIcon = (WeatherIconView) view.findViewById(R.id.w_icon);
-        TextView lowTemp            = (TextView) view.findViewById(R.id.w_low);
-        TextView highTemp           = (TextView) view.findViewById(R.id.w_high);
+      //  TextView lowTemp            = (TextView) view.findViewById(R.id.w_low);
+        //TextView highTemp           = (TextView) view.findViewById(R.id.w_high);
 
         /**
          * Format all of our data correctly.
@@ -87,8 +87,8 @@ public class WeeklyFragment extends Fragment implements View.OnClickListener{
          */
         dayName.setText(dateString);
         weatherIcon.setIconResource(weatherIconResource);
-        lowTemp.setText(getString(R.string.weather_temperature, lowTempLong));
-        highTemp.setText(getString(R.string.weather_temperature, highTempLong));
+        //lowTemp.setText(getString(R.string.weather_temperature, lowTempLong));
+        //highTemp.setText(getString(R.string.weather_temperature, highTempLong));
     }
 
     /**

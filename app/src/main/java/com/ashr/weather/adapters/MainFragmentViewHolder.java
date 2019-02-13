@@ -18,8 +18,8 @@ public class MainFragmentViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         temp = (TextView) itemView.findViewById(R.id.c_temp);
-        low = (TextView) itemView.findViewById(R.id.w_low);
-        high = (TextView) itemView.findViewById(R.id.w_high);
+//        low = (TextView) itemView.findViewById(R.id.w_low);
+  //      high = (TextView) itemView.findViewById(R.id.w_high);
         icon = (WeatherIconView) itemView.findViewById(R.id.w_icon);
     }
 
