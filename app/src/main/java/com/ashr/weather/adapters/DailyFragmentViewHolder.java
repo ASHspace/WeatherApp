@@ -21,8 +21,6 @@ public class DailyFragmentViewHolder extends RecyclerView.ViewHolder {
 
         hour = (TextView) itemView.findViewById(R.id.tv_weekly_forecast_day);
         date = (TextView) itemView.findViewById(R.id.hourly_date);
-        type = (TextView) itemView.findViewById(R.id.daily_type);
-        low = (TextView) itemView.findViewById(R.id.tv_weekly_forecast_low);
         high = (TextView) itemView.findViewById(R.id.tv_weekly_forecast_high);
         icon = (WeatherIconView) itemView.findViewById(R.id.weather_icon_item);
     }

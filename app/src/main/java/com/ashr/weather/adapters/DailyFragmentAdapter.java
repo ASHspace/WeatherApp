@@ -60,7 +60,7 @@ public class DailyFragmentAdapter extends RecyclerView.Adapter<DailyFragmentView
 
         holder.hour.setText(dayNameFormatted);
         holder.date.setText(hourDateFormatted);
-       // holder.type.setText(type);
+        //holder.type.setText(type);
         holder.high.setText(lowTempFormatted+"/"+highTempFormatted);
         //holder.high.setText(highTempFormatted);
         holder.icon.setIconResource(weatherIconResource);

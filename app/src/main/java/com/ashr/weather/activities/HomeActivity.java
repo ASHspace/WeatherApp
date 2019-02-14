@@ -16,6 +16,8 @@ import com.ashr.weather.adapters.WeeklyFragmentAdapter;
 import com.ashr.weather.fragments.AddCityDialogFragment;
 import com.ashr.weather.fragments.DailyFragment;
 import com.ashr.weather.fragments.GenericView;
+import com.ashr.weather.fragments.GenericViewDaily;
+import com.ashr.weather.fragments.GenericViewMain;
 import com.ashr.weather.fragments.MainFragment;
 import com.ashr.weather.fragments.WeeklyFragment;
 import com.ashr.weather.models.Datum;
@@ -126,6 +128,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         DailyFragment dailyFragment = new DailyFragment();
         WeeklyFragment weeklyFragment = new WeeklyFragment();
         GenericView genericView = new GenericView().newInstance(res2.body());
+        GenericViewDaily genericViewDailyView = new GenericViewDaily().newInstance(res2.body());
 
 
 
@@ -150,7 +153,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         WeeklyFragmentAdapter weeklyFragmentAdapter = new WeeklyFragmentAdapter(weeklyData, this);
 
         // Update the forecast data, but return a new list that does not have today in it.
-        dailyFragmentAdapter.updateForecastData(dailyData.subList(1, 7));
+        dailyFragmentAdapter.updateForecastData(dailyData.subList(1, 25));
         weeklyFragmentAdapter.updateForecastData(weeklyData.subList(1, weeklyData.size()));
 
         // Update the current conditions views.
@@ -159,7 +162,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         weeklyFragment.updateCurrentConditions(res2.body());
 
 
-        FragmentHelper.pushToFragmentManager(getSupportFragmentManager(), R.id.content_frame, new MainFragment().newInstance(res2.body()), false);
+        FragmentHelper.pushToFragmentManager(getSupportFragmentManager(), R.id.content_frame, new GenericViewMain(), false);
 
         //mainFragment.updateCurrentConditions(res2.body());
 

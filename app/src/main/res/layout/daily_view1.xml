@@ -16,7 +16,7 @@
         android:fontFamily="sans-serif-light"
         android:layout_gravity="center"
         android:text="day"
-        android:textSize="17sp"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <TextView
@@ -43,15 +43,15 @@
 
     <TextView
         android:id="@+id/h_type"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="fill"
         android:textColor="@android:color/darker_gray"
-        android:text="high"
-        android:textSize="15sp" />
+        android:text="NA"
+        android:textSize="13sp" />
 
     <TextView
-        android:id="@+id/h_high_low"
+        android:id="@+id/h_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
