@@ -27,7 +27,7 @@ public class GenericViewMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        if(view == null) this.view = inflater.inflate(R.layout.genericview_main, container, false);
+        if (view == null) this.view = inflater.inflate(R.layout.genericview_main, container, false);
 
         populateWeatherData();
 
@@ -43,32 +43,33 @@ public class GenericViewMain extends Fragment {
 
     private static Bundle createBundle(Forecast weatherData) {
         Bundle bundle = new Bundle();
-        List<Datum> dailyData = weatherData.getDaily().getData();
-        dailyData = dailyData.subList(1, 8);
-        int i=0;
 
-
-        for(Datum today: dailyData){
-         /*   String dayName = convertEpochToString(today.getTime(), "E", "GMT-6:00");
-            String dayNameFull = String.format(Locale.ENGLISH, "%s", dayName);
-            String iconName = "wi_forecast_io_" + today.getIcon().replace("-", "_");
-            Long highTemp = Math.round(today.getTemperatureMax());
-            String highTempFull = String.format(Locale.ENGLISH, "%s°", highTemp);
-            Long lowTemp = Math.round(today.getTemperatureMin());
-            String lowTempFull = String.format(Locale.ENGLISH, "%s°", lowTemp);
-
-
-
-
-
-            bundle.putString("dayName" + i , dayNameFull);
-            bundle.putString("iconName" + i , iconName);
-            bundle.putString("highTemp" + i , highTempFull);
-            bundle.putString("lowTemp" + i , lowTempFull);*/
-
-            i++;
+        String iconName = "wi_forecast_io_" + weatherData.getCurrently().getIcon().replace("-", "_");
+        Long curTemp = Math.round(weatherData.getCurrently().getTemperature());
+        String curTempFull = String.format(Locale.ENGLISH, " %s°", curTemp);
+        Long feelTemp = Math.round(weatherData.getCurrently().getApparentTemperature());
+        String feelTempFull = String.format(Locale.ENGLISH, "%s°", feelTemp);
+        String curStatus = String.format(Locale.ENGLISH, "%s", weatherData.getCurrently().getSummary());
+   /*     double precipIntensity = weatherData.getCurrently().getPrecipIntensity();
+        if(precipIntensity != 0) {
+            String percipType = String.format(Locale.ENGLISH, "%s", weatherData.getDaily().getData().);
         }
+        else
+        {
 
+        }*/
+        String curHumidity = String.format(Locale.ENGLISH, "%s", weatherData.getCurrently().getHumidity());
+        String curPressure = String.format(Locale.ENGLISH, "%s", weatherData.getCurrently().getPressure());
+        String curWind = String.format(Locale.ENGLISH, "%s", weatherData.getCurrently().getWindSpeed());
+
+
+        bundle.putString("iconName", iconName);
+        bundle.putString("curTemp", curTempFull);
+        bundle.putString("feelTemp", feelTempFull);
+        bundle.putString("curStatus", curStatus);
+        bundle.putString("curHumidity", curHumidity);
+        bundle.putString("curPressure", curPressure);
+        bundle.putString("curWind", curWind);
 
 
         return bundle;
@@ -77,28 +78,27 @@ public class GenericViewMain extends Fragment {
     private void populateWeatherData() {
         Bundle args = getArguments();
 
-   /*     for(int count = 0; count<7; count++) {
+        View view1 = view.findViewById(R.id.main_layout);
+        TextView loc = view1.findViewById(R.id.c_location);
+        WeatherIconView icon = view1.findViewById(R.id.c_weathericon);
+        TextView temp = view1.findViewById(R.id.c_temp);
+        TextView feels = view1.findViewById(R.id.c_feels);
+        TextView status = view1.findViewById(R.id.c_status);
 
-            String iView = "week_"+(count+1);
-            int resName = getResources().getIdentifier(iView, "id", getActivity().getPackageName());
-            View view1 = view.findViewById(resName);
-            TextView day = view1.findViewById(R.id.w_day);
-            WeatherIconView icon = view1.findViewById(R.id.w_icon);
-            TextView high = view1.findViewById(R.id.w_high);
-            TextView low = view1.findViewById(R.id.w_low);
+        View view2 = view.findViewById(R.id.c_details_layout);
+        TextView humidity = view2.findViewById(R.id.c_h)
 
 
-            String dayName = args.getString("dayName"+count);
-            String iconName = args.getString("iconName"+count);
-            String weatherIcon = getActivity().getString(getStringIdentifier(getActivity(), iconName));
-            String highTemp = args.getString("highTemp"+count);
-            String lowTemp = args.getString("lowTemp"+count);
+        String iconName = args.getString("iconName");
+        String weatherIcon = getActivity().getString(getStringIdentifier(getActivity(), iconName));
+        String curTemp = args.getString("curTemp");
+        String feelTemp = args.getString("feelTemp");
+        String curStatus = args.getString("curStatus");
 
-            day.setText(dayName);
-            icon.setIconResource(weatherIcon);
-            high.setText(highTemp);
-            low.setText(lowTemp);
-        }
-*/
+        icon.setIconResource(weatherIcon);
+        temp.setText(curTemp);
+        feels.setText("Feels Like"+" "+feelTemp);
+        status.setText(curStatus);
+
     }
 }

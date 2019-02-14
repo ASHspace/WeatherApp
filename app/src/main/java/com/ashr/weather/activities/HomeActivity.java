@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
         DailyFragment dailyFragment = new DailyFragment();
         WeeklyFragment weeklyFragment = new WeeklyFragment();
         GenericView genericView = new GenericView().newInstance(res2.body());
-        GenericViewDaily genericViewDailyView = new GenericViewDaily().newInstance(res2.body());
+        GenericViewMain genericViewDailyView = new GenericViewMain().newInstance(res2.body());
 
 
 
@@ -150,19 +150,19 @@ public class HomeActivity extends AppCompatActivity implements WeatherApiUtils.M
 
        // MainFragmentAdapter mainFragmentAdapter = new MainFragmentAdapter(currentData, getApplicationContext());
         DailyFragmentAdapter dailyFragmentAdapter= new DailyFragmentAdapter(dailyData, getApplicationContext());
-        WeeklyFragmentAdapter weeklyFragmentAdapter = new WeeklyFragmentAdapter(weeklyData, this);
+        //WeeklyFragmentAdapter weeklyFragmentAdapter = new WeeklyFragmentAdapter(weeklyData, this);
 
         // Update the forecast data, but return a new list that does not have today in it.
         dailyFragmentAdapter.updateForecastData(dailyData.subList(1, 25));
-        weeklyFragmentAdapter.updateForecastData(weeklyData.subList(1, weeklyData.size()));
+        //weeklyFragmentAdapter.updateForecastData(weeklyData.subList(1, weeklyData.size()));
 
         // Update the current conditions views.
         dailyFragment.updateCurrentConditions(res2.body());
 
-        weeklyFragment.updateCurrentConditions(res2.body());
+        //weeklyFragment.updateCurrentConditions(res2.body());
 
 
-        FragmentHelper.pushToFragmentManager(getSupportFragmentManager(), R.id.content_frame, new GenericViewMain(), false);
+        FragmentHelper.pushToFragmentManager(getSupportFragmentManager(), R.id.content_frame, genericViewDailyView, false);
 
         //mainFragment.updateCurrentConditions(res2.body());
 
