@@ -15,14 +15,14 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:text="Precip."
-        app:layout_constraintEnd_toStartOf="@+id/c_humidity"
+        android:text="Rain"
+        app:layout_constraintEnd_toStartOf="@+id/c_humidityLabel"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/c_humidity"
+        android:id="@+id/c_humidityLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -31,13 +31,13 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="Humidity"
-        app:layout_constraintEnd_toStartOf="@+id/c_pressure"
+        app:layout_constraintEnd_toStartOf="@+id/c_pressureLabel"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/c_precipType"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/c_pressure"
+        android:id="@+id/c_pressureLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -46,13 +46,13 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:text="Pressure"
-        app:layout_constraintEnd_toStartOf="@+id/c_wind"
+        app:layout_constraintEnd_toStartOf="@+id/c_windLabel"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/c_humidity"
+        app:layout_constraintStart_toEndOf="@+id/c_humidityLabel"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/c_wind"
+        android:id="@+id/c_windLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -63,46 +63,46 @@
         android:text="Wind"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/c_pressure"
+        app:layout_constraintStart_toEndOf="@+id/c_pressureLabel"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/m_humidity2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20%"
+        android:text="0%"
         app:layout_constraintEnd_toEndOf="@+id/c_precipType"
         app:layout_constraintStart_toStartOf="@+id/c_precipType"
         app:layout_constraintTop_toBottomOf="@+id/c_precipType" />
 
     <TextView
-        android:id="@+id/m_wind3"
+        android:id="@+id/c_humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12 mp/h"
-        app:layout_constraintEnd_toEndOf="@+id/c_humidity"
+        app:layout_constraintEnd_toEndOf="@+id/c_humidityLabel"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/c_humidity"
-        app:layout_constraintTop_toBottomOf="@+id/c_humidity" />
+        app:layout_constraintStart_toStartOf="@+id/c_humidityLabel"
+        app:layout_constraintTop_toBottomOf="@+id/c_humidityLabel" />
 
     <TextView
-        android:id="@+id/m_wind4"
+        android:id="@+id/c_pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="50%"
-        app:layout_constraintEnd_toEndOf="@+id/c_pressure"
+        app:layout_constraintEnd_toEndOf="@+id/c_pressureLabel"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="@+id/c_pressure"
-        app:layout_constraintTop_toBottomOf="@+id/c_pressure" />
+        app:layout_constraintStart_toStartOf="@+id/c_pressureLabel"
+        app:layout_constraintTop_toBottomOf="@+id/c_pressureLabel" />
 
     <TextView
-        android:id="@+id/m_wind5"
+        android:id="@+id/c_wind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1024"
-        app:layout_constraintEnd_toEndOf="@+id/c_wind"
-        app:layout_constraintStart_toStartOf="@+id/c_wind"
-        app:layout_constraintTop_toBottomOf="@+id/c_wind" />
+        app:layout_constraintEnd_toEndOf="@+id/c_windLabel"
+        app:layout_constraintStart_toStartOf="@+id/c_windLabel"
+        app:layout_constraintTop_toBottomOf="@+id/c_windLabel" />
 
     <TextView
         android:id="@+id/textView3"
@@ -164,7 +164,7 @@
         android:text="Sunset"
         app:layout_constraintEnd_toStartOf="@+id/weather_icon_item1"
         app:layout_constraintStart_toEndOf="@+id/textView41"
-        app:layout_constraintTop_toBottomOf="@+id/m_wind3" />
+        app:layout_constraintTop_toBottomOf="@+id/c_wind" />
 
     <com.github.pwittchen.weathericonview.WeatherIconView
         android:id="@+id/weather_icon_item1"
@@ -179,7 +179,7 @@
         app:layout_constraintEnd_toStartOf="@+id/textView42"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/m_wind4"
+        app:layout_constraintTop_toBottomOf="@+id/c_wind"
         custom:weatherIconColor="@android:color/darker_gray"
         custom:weatherIconResource="@string/wi_sunset"
         custom:weatherIconSize="26" />
@@ -196,7 +196,7 @@
         android:text="6:15 PM"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/weather_icon_item1"
-        app:layout_constraintTop_toBottomOf="@+id/m_wind4" />
+        app:layout_constraintTop_toBottomOf="@+id/c_wind" />
 
 
 </android.support.constraint.ConstraintLayout>

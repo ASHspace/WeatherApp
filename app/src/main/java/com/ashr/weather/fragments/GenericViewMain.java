@@ -86,7 +86,9 @@ public class GenericViewMain extends Fragment {
         TextView status = view1.findViewById(R.id.c_status);
 
         View view2 = view.findViewById(R.id.c_details_layout);
-        TextView humidity = view2.findViewById(R.id.c_h)
+        TextView humidity = view2.findViewById(R.id.c_humidity);
+        TextView pressure = view2.findViewById(R.id.c_pressure);
+        TextView wind = view2.findViewById(R.id.c_wind);
 
 
         String iconName = args.getString("iconName");
@@ -94,11 +96,17 @@ public class GenericViewMain extends Fragment {
         String curTemp = args.getString("curTemp");
         String feelTemp = args.getString("feelTemp");
         String curStatus = args.getString("curStatus");
+        String curHumidity = args.getString("curHumidity");
+        String curPressure = args.getString("curPressure");
+        String curWind = args.getString("curWind");
 
         icon.setIconResource(weatherIcon);
         temp.setText(curTemp);
         feels.setText("Feels Like"+" "+feelTemp);
         status.setText(curStatus);
+        humidity.setText(curHumidity);
+        pressure.setText(curPressure);
+        wind.setText(curWind);
 
     }
 }
